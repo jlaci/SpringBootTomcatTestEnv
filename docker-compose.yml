@@ -1,0 +1,26 @@
+version: '2'
+services:
+  
+  8516-tomcat-different-syntax:
+    image: tomcat:8.5.16
+    container_name: 8516-tomcat-different-syntax
+    volumes:
+      - ./8516webapps:/usr/local/tomcat/webapps/
+    environment:
+      - TEST_VARIABLE=This is set on the container as an ENV var with a different syntax
+  
+  8516-tomcat:
+    image: tomcat:8.5.16
+    container_name: 8516-tomcat
+    volumes:
+      - ./8516webapps:/usr/local/tomcat/webapps/
+    environment:
+      - test.variable=This is set on the container as an ENV var
+      
+  8514-tomcat:
+    image: tomcat:8.5.14
+    container_name: 8514-tomcat
+    volumes:
+      - ./8514webapps:/usr/local/tomcat/webapps/
+    environment:
+      - test.variable=This is set on the container as an ENV var

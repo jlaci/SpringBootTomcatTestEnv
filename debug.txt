@@ -1,0 +1,139 @@
+docker-compose up -d
+docker create --name 8516-manual-tomcat -v /Users/jlaci/Temp/SpringBootEnvTest/8516_manual_webapps:/usr/local/tomcat/webapps/ -e test.variable=This_is_set_on_the_container_as_an_ENV_var tomcat:8.5.16
+docker exec 8514-tomcat printenv | sort
+docker exec 8516-tomcat printenv | sort
+docker exec 8516-tomcat-different-syntax printenv | sort
+docker exec 8516-manual-tomcat printenv | sort
+
+------------------------------------------------------------------------------------------
+8514 tomcat:
+------------------------------------------------------------------------------------------
+printenv:
+
+CATALINA_HOME=/usr/local/tomcat
+CA_CERTIFICATES_JAVA_VERSION=20161107~bpo8+1
+GPG_KEYS=05AB33110949707C93A279E3D3EFE6B686867BA6 07E48665A34DCAFAE522E5E6266191C37C037D42 47309207D818FFD8DCD3F83F1931D684307A10A5 541FBE7D8F78B25E055DDEE13C370389288584E7 61B832AC2F1C5A90F0F9B00A1C506407564C17A3 713DA88BE50911535FE716F5208B0AB1D63011C7 79F7026C690BAA50B92CD8B66A3AD3F4F22C4FED 9BA44C2621385CB966EBA586F72C284D731FABEE A27677289986DB50844682F8ACB77FC2E86E29AC A9C5DF4D22E99998D9875A5110C01C5A2F6059E7 DCFD35E0BF8CA7344752DE8B6FB21E8933C60243 F3A04C595DB5B6A5F1ECA43E3B7BBB100D811BBE F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23
+HOME=/root
+HOSTNAME=e35e5d4b67fe
+JAVA_DEBIAN_VERSION=8u121-b13-1~bpo8+1
+JAVA_HOME=/docker-java-home/jre
+JAVA_VERSION=8u121
+LANG=C.UTF-8
+LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib
+OPENSSL_VERSION=1.1.0e-1
+PATH=/usr/local/tomcat/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+TOMCAT_ASC_URL=https://www.apache.org/dist/tomcat/tomcat-8/v8.5.14/bin/apache-tomcat-8.5.14.tar.gz.asc
+TOMCAT_MAJOR=8
+TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib
+TOMCAT_TGZ_URL=https://www.apache.org/dyn/closer.cgi?action=download&filename=tomcat/tomcat-8/v8.5.14/bin/apache-tomcat-8.5.14.tar.gz
+TOMCAT_VERSION=8.5.14
+no_proxy=*.local, 169.254/16
+test.variable=This is set on the container as an ENV var
+
+app log:
+
+2017-07-26 13:08:13.600  INFO 1 --- [ost-startStop-1] hu.jlaci.Application                     : Spring: Test Variable is: This is set on the container as an ENV var
+2017-07-26 13:08:13.600  INFO 1 --- [ost-startStop-1] hu.jlaci.Application                     : Java  : Test Variable is: This is set on the container as an ENV var
+
+
+------------------------------------------------------------------------------------------
+8516 tomcat:
+------------------------------------------------------------------------------------------
+printenv:
+
+CATALINA_HOME=/usr/local/tomcat
+CA_CERTIFICATES_JAVA_VERSION=20170531+nmu1
+GPG_KEYS=05AB33110949707C93A279E3D3EFE6B686867BA6 07E48665A34DCAFAE522E5E6266191C37C037D42 47309207D818FFD8DCD3F83F1931D684307A10A5 541FBE7D8F78B25E055DDEE13C370389288584E7 61B832AC2F1C5A90F0F9B00A1C506407564C17A3 713DA88BE50911535FE716F5208B0AB1D63011C7 79F7026C690BAA50B92CD8B66A3AD3F4F22C4FED 9BA44C2621385CB966EBA586F72C284D731FABEE A27677289986DB50844682F8ACB77FC2E86E29AC A9C5DF4D22E99998D9875A5110C01C5A2F6059E7 DCFD35E0BF8CA7344752DE8B6FB21E8933C60243 F3A04C595DB5B6A5F1ECA43E3B7BBB100D811BBE F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23
+HOME=/root
+HOSTNAME=d2c60a8e8f13
+JAVA_DEBIAN_VERSION=8u131-b11-2
+JAVA_HOME=/docker-java-home/jre
+JAVA_VERSION=8u131
+LANG=C.UTF-8
+LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib
+OPENSSL_VERSION=1.1.0f-3
+PATH=/usr/local/tomcat/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+TOMCAT_ASC_URL=https://www.apache.org/dist/tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz.asc
+TOMCAT_MAJOR=8
+TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib
+TOMCAT_TGZ_URL=https://www.apache.org/dyn/closer.cgi?action=download&filename=tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz
+TOMCAT_VERSION=8.5.16
+no_proxy=*.local, 169.254/16
+test.variable=This is set on the container as an ENV var
+
+app log:
+
+2017-07-26 13:08:13.350  INFO 1 --- [ost-startStop-1] hu.jlaci.Application                     : Spring: Test Variable is: This comes from the default application.properties file
+2017-07-26 13:08:13.350  INFO 1 --- [ost-startStop-1] hu.jlaci.Application                     : Java  : Test Variable is: null
+
+------------------------------------------------------------------------------------------
+8516 Different syntax:
+------------------------------------------------------------------------------------------
+printenv:
+
+CATALINA_HOME=/usr/local/tomcat
+CA_CERTIFICATES_JAVA_VERSION=20170531+nmu1
+GPG_KEYS=05AB33110949707C93A279E3D3EFE6B686867BA6 07E48665A34DCAFAE522E5E6266191C37C037D42 47309207D818FFD8DCD3F83F1931D684307A10A5 541FBE7D8F78B25E055DDEE13C370389288584E7 61B832AC2F1C5A90F0F9B00A1C506407564C17A3 713DA88BE50911535FE716F5208B0AB1D63011C7 79F7026C690BAA50B92CD8B66A3AD3F4F22C4FED 9BA44C2621385CB966EBA586F72C284D731FABEE A27677289986DB50844682F8ACB77FC2E86E29AC A9C5DF4D22E99998D9875A5110C01C5A2F6059E7 DCFD35E0BF8CA7344752DE8B6FB21E8933C60243 F3A04C595DB5B6A5F1ECA43E3B7BBB100D811BBE F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23
+HOME=/root
+HOSTNAME=60fb1da23eda
+JAVA_DEBIAN_VERSION=8u131-b11-2
+JAVA_HOME=/docker-java-home/jre
+JAVA_VERSION=8u131
+LANG=C.UTF-8
+LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib
+OPENSSL_VERSION=1.1.0f-3
+PATH=/usr/local/tomcat/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+TEST_VARIABLE=This is set on the container as an ENV var with a different syntax
+TOMCAT_ASC_URL=https://www.apache.org/dist/tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz.asc
+TOMCAT_MAJOR=8
+TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib
+TOMCAT_TGZ_URL=https://www.apache.org/dyn/closer.cgi?action=download&filename=tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz
+TOMCAT_VERSION=8.5.16
+no_proxy=*.local, 169.254/16
+
+app log:
+
+2017-07-26 13:08:13.618  INFO 1 --- [ost-startStop-1] hu.jlaci.Application                     : Spring: Test Variable is: This is set on the container as an ENV var with a different syntax
+2017-07-26 13:08:13.618  INFO 1 --- [ost-startStop-1] hu.jlaci.Application                     : Java  : Test Variable is: null
+
+------------------------------------------------------------------------------------------
+8516 manual tomcat:
+------------------------------------------------------------------------------------------
+printenv:
+
+CATALINA_HOME=/usr/local/tomcat
+CA_CERTIFICATES_JAVA_VERSION=20170531+nmu1
+GPG_KEYS=05AB33110949707C93A279E3D3EFE6B686867BA6 07E48665A34DCAFAE522E5E6266191C37C037D42 47309207D818FFD8DCD3F83F1931D684307A10A5 541FBE7D8F78B25E055DDEE13C370389288584E7 61B832AC2F1C5A90F0F9B00A1C506407564C17A3 713DA88BE50911535FE716F5208B0AB1D63011C7 79F7026C690BAA50B92CD8B66A3AD3F4F22C4FED 9BA44C2621385CB966EBA586F72C284D731FABEE A27677289986DB50844682F8ACB77FC2E86E29AC A9C5DF4D22E99998D9875A5110C01C5A2F6059E7 DCFD35E0BF8CA7344752DE8B6FB21E8933C60243 F3A04C595DB5B6A5F1ECA43E3B7BBB100D811BBE F7DA48BB64BCB84ECBA7EE6935CD23C10D498E23
+HOME=/root
+HOSTNAME=5d4056cb5aa6
+JAVA_DEBIAN_VERSION=8u131-b11-2
+JAVA_HOME=/docker-java-home/jre
+JAVA_VERSION=8u131
+LANG=C.UTF-8
+LD_LIBRARY_PATH=/usr/local/tomcat/native-jni-lib
+OPENSSL_VERSION=1.1.0f-3
+PATH=/usr/local/tomcat/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+TOMCAT_ASC_URL=https://www.apache.org/dist/tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz.asc
+TOMCAT_MAJOR=8
+TOMCAT_NATIVE_LIBDIR=/usr/local/tomcat/native-jni-lib
+TOMCAT_TGZ_URL=https://www.apache.org/dyn/closer.cgi?action=download&filename=tomcat/tomcat-8/v8.5.16/bin/apache-tomcat-8.5.16.tar.gz
+TOMCAT_VERSION=8.5.16
+no_proxy=*.local, 169.254/16
+test.variable=This_is_set_on_the_container_as_an_ENV_var
+
+app log:
+
+2017-07-26 11:01:54.081  INFO 1 --- [ost-startStop-2] hu.jlaci.Application                     : Spring: Test Variable is: This comes from the default application.properties file
+2017-07-26 11:01:54.081  INFO 1 --- [ost-startStop-2] hu.jlaci.Application                     : Java  : Test Variable is: null
+
+------------------------------------------------------------------------------------------
+8514 Host tomcat: (run with: env "test.variable=This is set on the container as an ENV var" ./catalina.sh run)
+------------------------------------------------------------------------------------------
+2017-07-26 13:29:46.429  INFO 2779 --- [ost-startStop-1] hu.jlaci.Application                     : Spring: Test Variable is: This is set on the container as an ENV var
+2017-07-26 13:29:46.429  INFO 2779 --- [ost-startStop-1] hu.jlaci.Application                     : Java  : Test Variable is: This is set on the container as an ENV var
+
+------------------------------------------------------------------------------------------
+8516 Host tomcat: (run with: env "test.variable=This is set on the container as an ENV var" ./catalina.sh run)
+------------------------------------------------------------------------------------------
+2017-07-26 13:30:17.043  INFO 2791 --- [ost-startStop-1] hu.jlaci.Application                     : Spring: Test Variable is: This is set on the container as an ENV var
+2017-07-26 13:30:17.043  INFO 2791 --- [ost-startStop-1] hu.jlaci.Application                     : Java  : Test Variable is: This is set on the container as an ENV var
